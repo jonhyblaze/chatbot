@@ -1,19 +1,20 @@
 import Head from "next/head"
 import { useState } from "react"
 import styles from "./index.module.css"
+import { useRef } from "react"
 
 export default function Home() {
   const [textInput, setTextInput] = useState("")
   const [result, setResult] = useState()
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
+  const outputContainerRef = useRef(null);
+
 
   console.log(questions)
   console.log(answers)
   
   console.log(questions.length)
-  
-  
   
   
   async function onSubmit(event) {
@@ -29,9 +30,6 @@ export default function Home() {
         body: JSON.stringify({ prompt: textInput }),
       });
       
- 
-
-
       const data = await response.json()
       if (response.status !== 200) {
         throw data.error || new Error(`Request failed with status ${response.status}`)
@@ -44,6 +42,10 @@ export default function Home() {
       console.error(error)
       alert(error.message)
     }
+    finally {
+       // Scroll to the bottom of the output container
+      outputContainerRef.current.scrollTop = outputContainerRef.current.scrollHeight
+    }
   }
 
   return (
@@ -55,12 +57,14 @@ export default function Home() {
         <link rel="icon" href="/dog.png" />
       </Head>
       <main className={styles.main}>
-      {result &&  questions.map((question, index) => (
+      <header className={styles.outputContainer} ref={outputContainerRef}>
+        {result && questions.map((question, index) => (
           <section key={index} className={styles.textOutput}>
             <aside className={styles.question}>{question}</aside>
             <article className={styles.result}>{answers[index]}</article>
           </section>
-        ))}
+          ))}
+        </header>
         <form onSubmit={onSubmit} className={styles.form}>
           <input
             type="text"
