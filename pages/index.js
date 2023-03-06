@@ -10,9 +10,16 @@ export default function Home() {
 
   console.log(questions)
   console.log(answers)
+  
+  console.log(questions.length)
+  
+  
+  
+  
   async function onSubmit(event) {
     event.preventDefault()
     setQuestions([...questions, textInput])
+    setTextInput("")
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -21,6 +28,9 @@ export default function Home() {
         },
         body: JSON.stringify({ prompt: textInput }),
       });
+      
+ 
+
 
       const data = await response.json()
       if (response.status !== 200) {
@@ -29,7 +39,6 @@ export default function Home() {
 
       setResult(data.choices[0].text)
       setAnswers([...answers, data.choices[0].text])
-      setTextInput("")
     } catch(error) {
       // Consider implementing your own error handling logic here
       console.error(error)
@@ -46,7 +55,11 @@ export default function Home() {
         <link rel="icon" href="/dog.png" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.result}>{result}</div>
+        {result && 
+        <section className={styles.textOutput}>
+          <aside className={styles.question}>{questions[questions.length -1]}</aside>
+          <article className={styles.result}>{result}</article>
+        </section>}
         <form onSubmit={onSubmit} className={styles.form}>
           <input
             type="text"

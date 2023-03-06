@@ -5,11 +5,31 @@
   justify-content: flex-end;
   align-items: center;
   padding-bottom: 4rem;
+  gap: 1.5rem
+}
+
+
+.textOutput {
+  align-self: center;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem
 }
 
 .result {
   width: 80%;
-  line-height: 140%; 
+  line-height: 140%;
+  background-color: #91d4e9;
+  padding: 1rem; 
+  border-radius: 5px;
+}
+
+.question {
+  background-color: #c1f1bd;
+  padding: 1rem; 
+  border-radius: 5px;
 }
 
 .form {
@@ -21,6 +41,7 @@
 }
 
 .input {
+  font-size: 16px;
   width: 80%;
   padding: 0.5rem;
   border: 1px solid grey;
@@ -28,6 +49,7 @@
 }
 
 .button {
+  font-size: 16px;
   width: 6rem;
   background-color: transparent;
   padding: .5rem 1rem;
@@ -35,7 +57,7 @@
 }
 
 .input,.button {
-    font-size: 18px;
+    font-size: 16px;
     border-width: 1px;
     border-color: #CCCCCC;
     background-color: #FFFFFF;
