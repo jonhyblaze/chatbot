@@ -55,11 +55,12 @@ export default function Home() {
         <link rel="icon" href="/dog.png" />
       </Head>
       <main className={styles.main}>
-        {result && 
-        <section className={styles.textOutput}>
-          <aside className={styles.question}>{questions[questions.length -1]}</aside>
-          <article className={styles.result}>{result}</article>
-        </section>}
+      {result &&  questions.map((question, index) => (
+          <section key={index} className={styles.textOutput}>
+            <aside className={styles.question}>{question}</aside>
+            <article className={styles.result}>{answers[index]}</article>
+          </section>
+        ))}
         <form onSubmit={onSubmit} className={styles.form}>
           <input
             type="text"
