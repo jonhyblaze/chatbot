@@ -1,20 +1,12 @@
-import Head from "next/head"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import styles from "./index.module.css"
-import { useRef } from "react"
 
 export default function Home() {
   const [textInput, setTextInput] = useState("")
   const [result, setResult] = useState()
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState([])
-  const outputContainerRef = useRef(null);
-
-
-  console.log(questions)
-  console.log(answers)
-  
-  console.log(questions.length)
+  const outputContainerRef = useRef(null)
   
   
   async function onSubmit(event) {
@@ -52,19 +44,15 @@ export default function Home() {
 
   return (
     <div>
-      <Head>
-        <title>chatbotApp</title>
-        <link rel="stylesheet" href="../styles/global.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"></link>
-        <link rel="icon" href="/dog.png" />
-      </Head>
       <main className={styles.main}>
       {result && 
         <header className={styles.outputContainer} ref={outputContainerRef}>
           {questions.map((question, index) => (
             <section key={index} className={styles.textOutput}>
               <aside className={styles.question}>{question}</aside>
-              <article className={styles.result}>{answers[index]}</article>
+              <DelayedRender delay={750}>
+                <article className={styles.result}>{answers[index]}</article>
+              </DelayedRender>
             </section>
             ))}
         </header>
@@ -84,4 +72,21 @@ export default function Home() {
       </main>
     </div>
   )
+}
+
+
+function DelayedRender({ delay, children }) {
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShouldRender(true);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [delay]);
+
+  return shouldRender ? children : null;
 }
