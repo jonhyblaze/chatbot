@@ -44,7 +44,9 @@ export default function Home() {
     }
     finally {
        // Scroll to the bottom of the output container
-      outputContainerRef.current.scrollTop = outputContainerRef.current.scrollHeight
+      if(answers.length > 1) {
+        outputContainerRef.current.scrollTop = outputContainerRef.current.scrollHeight
+      }  
     }
   }
 
@@ -57,14 +59,16 @@ export default function Home() {
         <link rel="icon" href="/dog.png" />
       </Head>
       <main className={styles.main}>
-      <header className={styles.outputContainer} ref={outputContainerRef}>
-        {result && questions.map((question, index) => (
-          <section key={index} className={styles.textOutput}>
-            <aside className={styles.question}>{question}</aside>
-            <article className={styles.result}>{answers[index]}</article>
-          </section>
-          ))}
+      {result && 
+        <header className={styles.outputContainer} ref={outputContainerRef}>
+          {questions.map((question, index) => (
+            <section key={index} className={styles.textOutput}>
+              <aside className={styles.question}>{question}</aside>
+              <article className={styles.result}>{answers[index]}</article>
+            </section>
+            ))}
         </header>
+      }
         <form onSubmit={onSubmit} className={styles.form}>
           <input
             type="text"
