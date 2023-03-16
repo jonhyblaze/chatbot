@@ -27,7 +27,7 @@ div:has(.main) {
 
 .textOutput {
   align-self: center;
-  width: 80%;
+  width: 75%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -35,7 +35,7 @@ div:has(.main) {
 }
 
 .result {
-  width: 80%;
+  width: 100%;
   line-height: 140%;
   background-color: #91d4e9;
   padding: 1rem; 
@@ -46,10 +46,12 @@ div:has(.main) {
   background-color: #c1f1bd;
   padding: 1rem; 
   border-radius: 5px;
+  align-self: flex-end;
+
 }
 
 .form {
-  width: 80%;
+  width: 75%;
   height: 10%;
   display: flex;
   align-items: center;
@@ -58,13 +60,14 @@ div:has(.main) {
 
 .input {
   font-size: 16px;
-  width: 80%;
+  width: 90%;
   padding: 0.5rem;
   border: 1px solid grey;
   border-radius: 64px;
 }
 
 .button {
+
   font-size: 16px;
   width: 6rem;
   background-color: transparent;

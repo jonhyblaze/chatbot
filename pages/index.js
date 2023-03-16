@@ -65,7 +65,7 @@ export default function Home() {
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
             className={styles.input}
-            autocomplete="off" 
+            autoComplete="off" 
           />
           <input type="submit" value="Send" className={styles.button}/>
         </form>
